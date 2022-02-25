@@ -1,0 +1,7 @@
+let apiFormApi = new TempApi.FormApi();import TempApi from '../src/index';document.getElementById('i3bg').onclick = (event) => {
+    event.preventDefault();
+    {  location.href= '/Page1' ;}};$(
+      function () { $("#datepicker").datepicker({format: 'dd-mm-yyyy'}); }
+    );document.getElementById('i1hjr').onclick = (event) => {
+    event.preventDefault();
+    let formId = window.location.pathname.replace('/Page3/','');let form = new TempApi.Form();form['formName'] = document.querySelector("[annotationname = 'formName']").value;form['formEmail'] = document.querySelector("[annotationname = 'formEmail']").value; let opts = {form};apiFormApi.updateform( formId, opts, (error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); document.querySelector('[annotationname = formName]').value = response.body.query.formName ;document.querySelector('[annotationname = formEmail]').value = response.body.query.formEmail ;{  location.href= '/Page1/'+response.body.query._id+'' ;}}});};window.onload = () => {let formId = window.location.pathname.replace('/Page3/','');apiFormApi.getform( formId, (error, data, response) => { if (error) {console.error(error);} else { console.log('API called successfully. Returned data: ' + data); document.querySelector('[annotationname = formName]').value = response.body.query.formName ;document.querySelector('[annotationname = formEmail]').value = response.body.query.formEmail ;}});};
